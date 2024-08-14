@@ -42,6 +42,53 @@ public class ConnectFour {
         return true;
     }
 
+    public static boolean checkRow(char[][] gameState, char player, int toWin){
+        int numberTokens = 0;
+        for(int row = 0; row<gameState.length; row++){
+            numberTokens = 0;
+            for (int col = 0;col < gameState[0].length;col++){
+                if (gameState[row][col] != player){
+                    numberTokens = 0;
+                }else{
+                    numberTokens +=1;
+                }
+            }
+            if (numberTokens >= toWin) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkColumn(char[][] gameState, char player, int toWin){
+        // check for column win
+        int numberTokens = 0;
+        for (int col = 0; col < gameState[0].length; col++) {
+            numberTokens = 0;
+            for (int row = 0; row < gameState.length; row++) {
+                if (gameState[row][col] == player) {
+                    numberTokens += 1;
+                } else {
+                    numberTokens = 0;
+                }
+            }
+            if (numberTokens >= toWin) {
+                return true;
+            }
+        }
+        return  false;
+    }
+
+
+    public static boolean checkWin(char[][] gameState, char player, int toWin) {
+        if (checkRow(gameState, player, toWin)) {
+            return true;
+        } else if (checkColumn(gameState, player, toWin)) {
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("Connect four game");
         Scanner in = new Scanner(System.in);
@@ -66,6 +113,12 @@ public class ConnectFour {
                 }
             } while (validMove == false);
             gameState =  updateBoard(gameState, move, player);
+            winner = checkWin(gameState, player, toWin);
+            if (winner){
+                System.out.println("Player " + player + " wins!");
+                displayGame(gameState);
+                break;
+            }
             turn += 1;
             if (player ==  'R'){
                 player = 'Y';
