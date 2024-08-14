@@ -1,4 +1,5 @@
 Connect four Code test
+
 Technical choices I chose to use Java because this is the language that ovarro preferes and i have some experience writing JUnit tests so i could add automated tests to the code. Java also allowed me to create classes and methods for the game making it more readable and easier to test.
 
 The app had the following requirements
