@@ -1,9 +1,9 @@
 package test;
 import com.connectfour.ConnectFour;
 import org.junit.Test;
-import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+// Junit tests for checking valid moves and checking for a win
 public class ConnectFourTest {
     @Test
     public void testValidMove(){
@@ -11,9 +11,10 @@ public class ConnectFourTest {
         char[][] gameState = {{' ', 'R', ' '}
                     ,{'R', 'Y', 'R'} ,
                     {'R', 'R', 'Y'}};
-        assertTrue(game.validateMove(0, gameState));
-        assertFalse(game.validateMove(4, gameState));
-        assertFalse(game.validateMove(1, gameState));
+        assertTrue(game.validateMove("0", gameState));
+        assertFalse(game.validateMove("4", gameState));
+        assertFalse(game.validateMove("1", gameState));
+        assertFalse(game.validateMove("a", gameState));
     }
 
     @Test
@@ -41,7 +42,6 @@ public class ConnectFourTest {
                 {'Y', 'R', 'R'}};
         assertTrue(game.checkColumn(gameState, 'Y', 3));
     }
-
     @Test
     public void  testWinDiagonalAsc(){
         ConnectFour  game =  new ConnectFour();
