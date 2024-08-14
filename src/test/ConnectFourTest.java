@@ -41,4 +41,30 @@ public class ConnectFourTest {
                 {'Y', 'R', 'R'}};
         assertTrue(game.checkColumn(gameState, 'Y', 3));
     }
+
+    @Test
+    public void  testWinDiagonalAsc(){
+        ConnectFour  game =  new ConnectFour();
+        char[][] gameState = {{'R', ' ', 'Y'}
+                ,{'R', 'Y', 'R'} ,
+                {'Y', 'R', 'Y'}};
+        assertTrue(game.checkAscendingDiagonal(gameState, 'Y', 3));
+    }
+
+    @Test
+    public void  testWinDiagonalAs2(){
+        ConnectFour  game =  new ConnectFour();
+        char[][] gameState = {{'R', ' ', 'R'}
+                ,{'R', 'Y', 'R'} ,
+                {'Y', 'R', 'Y'}};
+        assertTrue(game.checkAscendingDiagonal(gameState, 'Y', 2));
+    }
+    @Test
+    public void  testWinDiagonalDesc(){
+        ConnectFour  game =  new ConnectFour();
+        char[][] gameState = {{'Y', ' ', 'R'}
+                ,{'R', 'Y', 'R'} ,
+                {'Y', 'R', 'Y'}};
+        assertTrue(game.checkDescendingDiagonal(gameState, 'Y', 3));
+    }
 }

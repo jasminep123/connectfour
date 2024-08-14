@@ -79,12 +79,65 @@ public class ConnectFour {
         return  false;
     }
 
+    public static  boolean checkDescendingDiagonal(char[][] gameState, char player, int toWin){
+        // check for descending diagonal win
+        int numberTokens = 0;
+        // Loop to start from different diagonals
+        for (int row = 0; row <= gameState.length - toWin; row++) {
+            for (int col = 0; col <= gameState[0].length - toWin; col++) {
+                numberTokens = 0;
+
+                // Check the diagonal starting from (startRow, startCol)
+                for (int i = 0; i < toWin; i++) {
+                    if (gameState[row + i][col + i] == player) {
+                        numberTokens += 1;
+                    } else {
+                        numberTokens = 0;
+                        break;
+                    }
+                }
+                if (numberTokens == toWin) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkAscendingDiagonal(char[][] gameState, char player, int toWin) {
+        int numberTokens = 0;
+
+        // Loop to start from different diagonals
+        for (int row = toWin - 1; row < gameState.length; row++) {
+            for (int col = 0; col <= gameState[0].length - toWin; col++) {
+                numberTokens = 0;
+
+                // Check the diagonal starting from (startRow, startCol)
+                for (int i = 0; i < toWin; i++) {
+                    if (gameState[row - i][col + i] == player) {
+                        numberTokens += 1;
+                    } else {
+                        numberTokens = 0;
+                        break;
+                    }
+                }
+                if (numberTokens == toWin) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public static boolean checkWin(char[][] gameState, char player, int toWin) {
         if (checkRow(gameState, player, toWin)) {
             return true;
         } else if (checkColumn(gameState, player, toWin)) {
             return true;
+        } else if (checkDescendingDiagonal(gameState, player, toWin)) {
+            return true;
+        } else if (checkAscendingDiagonal(gameState, player, toWin)){
+        return true;
         }
         return false;
     }
@@ -92,16 +145,18 @@ public class ConnectFour {
     public static void main(String[] args) {
         System.out.println("Connect four game");
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter the size of the board: ");
-        int boardSize =  in.nextInt();
+        System.out.println("Enter the number of rows in the board: ");
+        int boardSizeRow =  in.nextInt();
+        System.out.println("Enter the number of columns in the board: ");
+        int boardSizeCol =  in.nextInt();
         System.out.println("Enter the number of tokens to win: ");
         int toWin = in.nextInt();
-        char[][] gameState =  new char[boardSize][boardSize];
+        char[][] gameState =  new char[boardSizeRow][boardSizeCol];
         displayGame(gameState);
         boolean winner =  false;
         int turn = 1;
         char player =  'R';
-        while (winner == false && turn <= boardSize*boardSize){
+        while (winner == false && turn <= boardSizeRow*boardSizeCol){
             boolean validMove;
             int move;
             do{
